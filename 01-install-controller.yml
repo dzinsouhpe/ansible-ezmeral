@@ -1,0 +1,38 @@
+---
+- hosts: controllers
+  remote_user: root
+
+  tasks:
+  - name: Create temporary directory for installation
+    file:
+      path: /tmp/ezmeral-install
+      state: directory
+      mode: '0755'
+
+  - name: Copy Ezmeral binaries
+    copy:
+      src: ./bin/
+      dest: /tmp/ezmeral-install
+      mode: '0755'
+
+  - name: Ensure that docker packages are removed
+    yum:
+      name: docker*
+      state: absent
+
+  - name: Execute pre-checks script
+    shell: ./hpe-cp-prechecks-5.1.bin
+    args:
+      chdir: /tmp/ezmeral-install
+
+  - name: Copy SSL certs
+    copy:
+      src: ./certs/
+      dest: /opt/certs/
+      mode: '0700'
+
+  - name: Install controller
+    shell: ./hpe-cp-rhel-release-5.1-3011.bin --skipeula --ssl-priv-key /opt/certs/mip-bdcs-vm75.key --ssl-cert /opt/certs/mip-bdcs-vm75.crt --gateway-priv-key /opt/certs/mip-bdcs-vm79.key --gateway-ssl-cert /opt/certs/mip-bdcs-vm79.crt
+    args:
+      chdir: /tmp/ezmeral-install
+
