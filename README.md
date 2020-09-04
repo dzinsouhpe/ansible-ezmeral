@@ -12,5 +12,5 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an
 https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-apache-for-centos-7
 https://devcenter.heroku.com/articles/ssl-certificate-self
 
-## Install controllers
+## Install controller
 `ansible-playbook 01-install-controller.yml`
