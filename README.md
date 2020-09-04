@@ -13,4 +13,4 @@ https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificat
 https://devcenter.heroku.com/articles/ssl-certificate-self
 
 ## Install controllers
-`ansible-playbook prepare-controllers.yml`
+`ansible-playbook 01-install-controller.yml`
