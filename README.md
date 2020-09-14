@@ -11,10 +11,13 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an
 ### How To Create an SSL Certificate on Apache for CentOS 7
 https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-apache-for-centos-7
 https://devcenter.heroku.com/articles/ssl-certificate-self  
-`openssl genrsa -des3 -passout pass:x -out server.pass.key 2048`  
-`openssl rsa -passin pass:x -in server.pass.key -out server.key`  
-`openssl req -new -key server.key -out server.csr`  
-`openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt`  
+`openssl genrsa -des3 -passout pass:x -out ezmeral.pass.key 2048`  
+`openssl rsa -passin pass:x -in ezmeral.pass.key -out controller.key`  
+`openssl req -new -key controller.key -out controller.csr`  
+`openssl x509 -req -sha256 -days 365 -in controller.csr -signkey controller.key -out controller.crt`  
+`openssl rsa -passin pass:x -in ezmeral.pass.key -out gateway.key`  
+`openssl req -new -key gateway.key -out gateway.csr`  
+`openssl x509 -req -sha256 -days 365 -in gateway.csr -signkey gateway.key -out gateway.crt`  
 
 ## Install controller
 `ansible-playbook 01-install-controller.yml`
